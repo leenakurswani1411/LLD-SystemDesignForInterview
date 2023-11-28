@@ -13,14 +13,15 @@ Advantages:
 
 **Example in Java**:
 
-Handler Interface
-// Interface for handlers
+---Interface for handlers 
+
 interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
 }
 
-// Concrete Handler A
+---Concrete Handler A
+
 class ConcreteHandlerA implements Handler {
     private Handler next;
 
@@ -39,7 +40,8 @@ class ConcreteHandlerA implements Handler {
     }
 }
 
-// Concrete Handler B
+---Concrete Handler B
+
 class ConcreteHandlerB implements Handler {
     private Handler next;
 
@@ -58,7 +60,8 @@ class ConcreteHandlerB implements Handler {
     }
 }
 
-// Client class
+---Client class
+
 public class Client {
     public static void main(String[] args) {
         // Create instances of handlers
@@ -74,5 +77,4 @@ public class Client {
     }
 }
 
-In this example, handlerA first tries to handle the request. If it can't, it passes the request to handlerB. You can extend this chain by adding more handlers.
 

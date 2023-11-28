@@ -14,15 +14,14 @@ Advantages:
 **Example in Java**:
 
 Interface for Handlers
-java
-Copy code
+'''
 interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
 }
+'''
+
 Concrete Handler A
-java
-Copy code
 class ConcreteHandlerA implements Handler {
     private Handler next;
 

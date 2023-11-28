@@ -1,4 +1,4 @@
-# H1 Que. Can you please explain to me how the chain of responsibility works with some code references in Java?
+# Que. Can you please explain to me how the chain of responsibility works with some code references in Java?
 
 **Ans. The Chain of Responsibility pattern is a behavioral design pattern that allows an object to pass a request along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.**
 
@@ -15,14 +15,14 @@ Advantages:
 
 Handler Interface
 
-*interface Handler {
+'interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
-}*
+}'
 
 Concrete Handlers
 
-*class ConcreteHandlerA implements Handler {
+'class ConcreteHandlerA implements Handler {
     private Handler next;
     @Override
     public void setNext(Handler handler) {
@@ -36,9 +36,9 @@ Concrete Handlers
             next.handleRequest(request);
         }
      }
-}*
+}'
 
-*class ConcreteHandlerB implements Handler {
+'class ConcreteHandlerB implements Handler {
     private Handler next;
     @Override
     public void setNext(Handler handler) {
@@ -52,11 +52,11 @@ Concrete Handlers
             next.handleRequest(request);
         }
     }
-}*
+}'
 
 Client
 
-*public class Client {
+'public class Client {
     public static void main(String[] args) {
         Handler handlerA = new ConcreteHandlerA();
         Handler handlerB = new ConcreteHandlerB();
@@ -64,7 +64,7 @@ Client
         handlerA.handleRequest("A"); // Handled by HandlerA
         handlerA.handleRequest("B"); // Passed to HandlerB and handled there
     }
-}*
+}'
 
 In this example, handlerA first tries to handle the request. If it can't, it passes the request to handlerB. You can extend this chain by adding more handlers.
 

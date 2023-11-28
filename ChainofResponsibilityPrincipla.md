@@ -13,38 +13,35 @@ Advantages:
 
 **Example in Java**:
 
----Interface for handlers 
+1. Interface for handlers⬇️
 
-@Handler
-interface Handler {
-    void setNext(Handler handler);
-    void handleRequest(String request);
-}
-
----Concrete Handler A
-
-@A
-class ConcreteHandlerA implements Handler {
-    private Handler next;
-
-    @Override
-    public void setNext(Handler handler) {
-        this.next = handler;
+    interface Handler {
+        void setNext(Handler handler);
+        void handleRequest(String request);
     }
 
-    @Override
-    public void handleRequest(String request) {
-        if ("A".equals(request)) {
-            System.out.println("Handler A handled the request.");
-        } else if (next != null) {
-            next.handleRequest(request);
+2. Concrete Handler A⬇️
+
+    class ConcreteHandlerA implements Handler {
+        private Handler next;
+
+        @Override
+        public void setNext(Handler handler) {
+            this.next = handler;
+        }
+    
+        @Override
+        public void handleRequest(String request) {
+            if ("A".equals(request)) {
+                System.out.println("Handler A handled the request.");
+            } else if (next != null) {
+                next.handleRequest(request);
+            }
         }
     }
-}
 
----Concrete Handler B
+3. Concrete Handler B⬇️
 
-@B
 class ConcreteHandlerB implements Handler {
     private Handler next;
 
@@ -63,9 +60,9 @@ class ConcreteHandlerB implements Handler {
     }
 }
 
----Client class
+4. Client class⬇️
 
-@C
+
 public class Client {
     public static void main(String[] args) {
         // Create instances of handlers
@@ -80,5 +77,7 @@ public class Client {
         handlerA.handleRequest("B"); // Passed to HandlerB and handled there
     }
 }
+
+The change will be diverered from Handler A to B if no suitable match of request will be found by the handler A. This flow will go on.
 
 

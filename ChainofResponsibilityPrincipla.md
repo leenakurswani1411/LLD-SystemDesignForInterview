@@ -14,14 +14,14 @@ Advantages:
 **Example in Java**:
 
 Interface for Handlers
-'''
+```java
 interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
 }
-'''
-
+```
 Concrete Handler A
+
 class ConcreteHandlerA implements Handler {
     private Handler next;
 
@@ -40,8 +40,7 @@ class ConcreteHandlerA implements Handler {
     }
 }
 Concrete Handler B
-java
-Copy code
+
 class ConcreteHandlerB implements Handler {
     private Handler next;
 
@@ -59,9 +58,9 @@ class ConcreteHandlerB implements Handler {
         }
     }
 }
+
 Client Class
-java
-Copy code
+
 public class Client {
     public static void main(String[] args) {
         // Create instances of handlers
@@ -76,6 +75,7 @@ public class Client {
         handlerA.handleRequest("B"); // Passed to HandlerB and handled there
     }
 }
+
 This should provide a cleaner and more readable representation of the Java code in a markdown file. Let me know if there's anything else I can help you with!
 
 

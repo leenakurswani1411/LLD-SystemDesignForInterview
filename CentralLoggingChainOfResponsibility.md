@@ -14,7 +14,7 @@
 
 ### Java Example:
 
-#### Handler Interface
+Handler Interface
 ```java
 interface Logger {
     void setNext(Logger nextLogger);
@@ -27,16 +27,14 @@ enum LogLevel {
 }
 ```
 
-#### Concrete Handlers
-java
+Concrete Handlers
+```java
 class InfoLogger implements Logger {
     private Logger nextLogger;
-
     @Override
     public void setNext(Logger nextLogger) {
         this.nextLogger = nextLogger;
     }
-
     @Override
     public void logMessage(String message, LogLevel level) {
         if (level == LogLevel.INFO) {
@@ -46,15 +44,14 @@ class InfoLogger implements Logger {
         }
     }
 }
-
+```
+```java
 class WarnLogger implements Logger {
     private Logger nextLogger;
-
     @Override
     public void setNext(Logger nextLogger) {
         this.nextLogger = nextLogger;
     }
-
     @Override
     public void logMessage(String message, LogLevel level) {
         if (level == LogLevel.WARN) {
@@ -64,15 +61,14 @@ class WarnLogger implements Logger {
         }
     }
 }
-
+```
+```java
 class ErrorLogger implements Logger {
     private Logger nextLogger;
-
     @Override
     public void setNext(Logger nextLogger) {
         this.nextLogger = nextLogger;
     }
-
     @Override
     public void logMessage(String message, LogLevel level) {
         if (level == LogLevel.ERROR) {
@@ -82,28 +78,22 @@ class ErrorLogger implements Logger {
         }
     }
 }
+```
 
-
-#### Microservice (Client)
-java
+Microservice (Client)
+```java
 public class Microservice {
     public static void main(String[] args) {
         Logger infoLogger = new InfoLogger();
         Logger warnLogger = new WarnLogger();
         Logger errorLogger = new ErrorLogger();
-
         infoLogger.setNext(warnLogger);
         warnLogger.setNext(errorLogger);
-
         infoLogger.logMessage("This is an information.", LogLevel.INFO);
         infoLogger.logMessage("This is a warning.", LogLevel.WARN);
         infoLogger.logMessage("This is an error!", LogLevel.ERROR);
     }
 }
-
+```
 
 In this example, each logger handles a specific type of log message. If a logger cannot handle a message (e.g., InfoLogger receives a WARN message), it passes the message to the next logger in the chain. This approach aligns well with microservices' principles of modularity and decoupling, allowing for flexible and maintainable logging across different services.
-
-
-
-

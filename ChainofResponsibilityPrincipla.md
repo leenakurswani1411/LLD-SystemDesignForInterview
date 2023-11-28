@@ -1,6 +1,5 @@
-Que. Can you please explain to me how the chain of responsibility works with some code reference in Java.
-Ans.
-The Chain of Responsibility pattern is a behavioral design pattern that allows an object to pass a request along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
+Que. Can you please explain to me how the chain of responsibility works with some code references in Java? 
+Ans. The Chain of Responsibility pattern is a behavioral design pattern that allows an object to pass a request along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
 
 Concept:
 Handler Interface: This defines a method for handling requests and optionally includes a link to the next handler in the chain.

@@ -15,14 +15,14 @@ Advantages:
 
 Handler Interface
 
-'interface Handler {
+interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
-}'
+}
 
 Concrete Handlers
 
-'class ConcreteHandlerA implements Handler {
+class ConcreteHandlerA implements Handler {
     private Handler next;
     @Override
     public void setNext(Handler handler) {
@@ -36,9 +36,9 @@ Concrete Handlers
             next.handleRequest(request);
         }
      }
-}'
+}
 
-'class ConcreteHandlerB implements Handler {
+class ConcreteHandlerB implements Handler {
     private Handler next;
     @Override
     public void setNext(Handler handler) {
@@ -52,11 +52,11 @@ Concrete Handlers
             next.handleRequest(request);
         }
     }
-}'
+}
 
 Client
 
-'public class Client {
+public class Client {
     public static void main(String[] args) {
         Handler handlerA = new ConcreteHandlerA();
         Handler handlerB = new ConcreteHandlerB();
@@ -64,7 +64,7 @@ Client
         handlerA.handleRequest("A"); // Handled by HandlerA
         handlerA.handleRequest("B"); // Passed to HandlerB and handled there
     }
-}'
+}
 
 In this example, handlerA first tries to handle the request. If it can't, it passes the request to handlerB. You can extend this chain by adding more handlers.
 

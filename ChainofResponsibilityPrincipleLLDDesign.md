@@ -6,6 +6,7 @@ Concept:
 1. Handler Interface: This defines a method for handling requests and optionally includes a link to the next handler in the chain.
 2. Concrete Handlers: These are specific handlers that implement the handler interface. Each handler decides whether to process the request and/or pass it to the next handler.
 3. Client: The client initializes the chain and sends requests to the first handler.
+
 Advantages:
 1. Decouples Request Sender and Receivers: The sender of a request is not aware of which object in the chain will handle the request.
 2. Dynamic Chain Configuration: The chain can be re-ordered or changed dynamically at runtime.

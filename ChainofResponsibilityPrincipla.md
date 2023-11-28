@@ -15,6 +15,7 @@ Advantages:
 
 ---Interface for handlers 
 
+@
 interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
@@ -22,6 +23,7 @@ interface Handler {
 
 ---Concrete Handler A
 
+@
 class ConcreteHandlerA implements Handler {
     private Handler next;
 
@@ -42,6 +44,7 @@ class ConcreteHandlerA implements Handler {
 
 ---Concrete Handler B
 
+@
 class ConcreteHandlerB implements Handler {
     private Handler next;
 
@@ -62,6 +65,7 @@ class ConcreteHandlerB implements Handler {
 
 ---Client class
 
+@
 public class Client {
     public static void main(String[] args) {
         // Create instances of handlers

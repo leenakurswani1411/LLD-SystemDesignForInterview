@@ -21,15 +21,13 @@ interface Handler {
 }
 ```
 Concrete Handler A
-
+```java
 class ConcreteHandlerA implements Handler {
     private Handler next;
-
     @Override
     public void setNext(Handler handler) {
         this.next = handler;
     }
-
     @Override
     public void handleRequest(String request) {
         if ("A".equals(request)) {
@@ -39,16 +37,16 @@ class ConcreteHandlerA implements Handler {
         }
     }
 }
-Concrete Handler B
+```
 
+Concrete Handler B
+```java
 class ConcreteHandlerB implements Handler {
     private Handler next;
-
     @Override
     public void setNext(Handler handler) {
         this.next = handler;
     }
-
     @Override
     public void handleRequest(String request) {
         if ("B".equals(request)) {
@@ -58,30 +56,22 @@ class ConcreteHandlerB implements Handler {
         }
     }
 }
-
+```
 Client Class
-
+```java
 public class Client {
     public static void main(String[] args) {
         // Create instances of handlers
         Handler handlerA = new ConcreteHandlerA();
         Handler handlerB = new ConcreteHandlerB();
-
         // Set the next handler for handlerA
         handlerA.setNext(handlerB);
-
         // Make requests to handlerA
         handlerA.handleRequest("A"); // Handled by HandlerA
         handlerA.handleRequest("B"); // Passed to HandlerB and handled there
     }
 }
-
-This should provide a cleaner and more readable representation of the Java code in a markdown file. Let me know if there's anything else I can help you with!
-
-
-
-
-
+```
 
 The change will be diverered from Handler A to B if no suitable match of request will be found by the handler A. This flow will go on.
 

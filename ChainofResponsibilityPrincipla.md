@@ -14,21 +14,21 @@ Advantages:
 **Example in Java**:
 
 Handler Interface
-
-interface Handler 
-{
+// Interface for handlers
+interface Handler {
     void setNext(Handler handler);
     void handleRequest(String request);
 }
 
-Concrete Handlers
-
+// Concrete Handler A
 class ConcreteHandlerA implements Handler {
     private Handler next;
+
     @Override
     public void setNext(Handler handler) {
         this.next = handler;
     }
+
     @Override
     public void handleRequest(String request) {
         if ("A".equals(request)) {
@@ -36,15 +36,18 @@ class ConcreteHandlerA implements Handler {
         } else if (next != null) {
             next.handleRequest(request);
         }
-     }
+    }
 }
 
+// Concrete Handler B
 class ConcreteHandlerB implements Handler {
     private Handler next;
+
     @Override
     public void setNext(Handler handler) {
         this.next = handler;
     }
+
     @Override
     public void handleRequest(String request) {
         if ("B".equals(request)) {
@@ -55,13 +58,17 @@ class ConcreteHandlerB implements Handler {
     }
 }
 
-Client
-
+// Client class
 public class Client {
     public static void main(String[] args) {
+        // Create instances of handlers
         Handler handlerA = new ConcreteHandlerA();
         Handler handlerB = new ConcreteHandlerB();
+
+        // Set the next handler for handlerA
         handlerA.setNext(handlerB);
+
+        // Make requests to handlerA
         handlerA.handleRequest("A"); // Handled by HandlerA
         handlerA.handleRequest("B"); // Passed to HandlerB and handled there
     }

@@ -1,109 +1,78 @@
-The Decorator Design Pattern allows for dynamically adding behavior to objects without affecting the behavior of other objects from the same class. It's widely used in Java, particularly for I/O operations. A real-world example is decorating a BufferedReader around a FileReader to add buffering capabilities to file reading operations.
+## Tell me how decorator design pattern works?
+
+**The Decorator Design Pattern allows for dynamically adding behavior to objects without affecting the behavior of other objects from the same class. It's widely used in Java, particularly for I/O operations. A real-world example is decorating a BufferedReader around a FileReader to add buffering capabilities to file reading operations.**
 
 ### Real-World Example: Coffee Shop
-Imagine a coffee shop where you can order a base coffee and then add various extras (like milk, sugar, whipped cream) to customize it.
+Let's create an example where we have a LargeFileReader interface representing the action of reading a large file. The ProxyFileReader will act as a proxy to this file reader, initializing the actual file reading operation only when a method requiring file contents is called.
 
 ### Components:
-1. **Component (Coffee)**: An interface defining the behavior (methods) of the coffee.
-2. **Concrete Component (SimpleCoffee)**: Basic implementation of the coffee interface.
-3. **Decorator (CoffeeDecorator)**: Abstract class implementing the Coffee interface, with a reference to a Coffee object.
-4. **Concrete Decorators (Milk, Sugar, etc.)**: These classes extend the Decorator class, adding new behavior (like adding milk or sugar).
+1. **Subject Interface (LargeFileReader)**: An interface defining the read operation.
+2. **Real Subject (RealFileReader)**: The actual implementation of the file reader.
+3. **Proxy (ProxyFileReader)**: A proxy to the real file reader, which initializes the real reader only when needed.
 
-### Implementation in Java:
+### Java Implementation:
 
-#### Coffee Interface
-java
-public interface Coffee {
-    String getDescription();
-    double cost();
+#### LargeFileReader Interface
+```java
+public interface LargeFileReader {
+    String readContents();
 }
+```
 
-
-#### Concrete Coffee
-java
-public class SimpleCoffee implements Coffee {
+#### Real FileReader
+```java
+public class RealFileReader implements LargeFileReader {
+    private String filePath;
+    public RealFileReader(String filePath) {
+        this.filePath = filePath;
+        loadFileFromDisk();
+    }
+    private void loadFileFromDisk() {
+        System.out.println("Loading file from disk: " + filePath);
+        // Simulate time-consuming operation
+    }
     @Override
-    public String getDescription() {
-        return "Simple Coffee";
-    }
-
-    @Override
-    public double cost() {
-        return 2.00;
-    }
-}
-
-
-#### Coffee Decorator Abstract Class
-java
-public abstract class CoffeeDecorator implements Coffee {
-    protected Coffee coffee;
-
-    public CoffeeDecorator(Coffee coffee) {
-        this.coffee = coffee;
-    }
-
-    public String getDescription() {
-        return coffee.getDescription();
-    }
-
-    public double cost() {
-        return coffee.cost();
+    public String readContents() {
+        return "File contents of " + filePath;
     }
 }
+```
 
-
-#### Concrete Decorators
-java
-public class MilkDecorator extends CoffeeDecorator {
-    public MilkDecorator(Coffee coffee) {
-        super(coffee);
+#### Proxy FileReader
+```java
+public class ProxyFileReader implements LargeFileReader {
+    private String filePath;
+    private RealFileReader realFileReader;
+    public ProxyFileReader(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
-    public String getDescription() {
-        return coffee.getDescription() + ", with milk";
-    }
-
-    @Override
-    public double cost() {
-        return coffee.cost() + 0.50;
+    public String readContents() {
+        if (realFileReader == null) {
+            realFileReader = new RealFileReader(filePath);
+        }
+        return realFileReader.readContents();
     }
 }
+```
 
-public class SugarDecorator extends CoffeeDecorator {
-    public SugarDecorator(Coffee coffee) {
-        super(coffee);
-    }
-
-    @Override
-    public String getDescription() {
-        return coffee.getDescription() + ", with sugar";
-    }
-
-    @Override
-    public double cost() {
-        return coffee.cost() + 0.25;
-    }
-}
-
-
-#### Using the Decorator Pattern
-java
-public class CoffeeShop {
+#### Using the Proxy
+```java
+public class ProxyPatternDemo {
     public static void main(String[] args) {
-        Coffee coffee = new SimpleCoffee();
-        coffee = new MilkDecorator(coffee);
-        coffee = new SugarDecorator(coffee);
-
-        System.out.println(coffee.getDescription() + " Cost: $" + coffee.cost());
+        LargeFileReader fileReader = new ProxyFileReader("largefile.txt");     
+        // File is not loaded at this point
+        System.out.println("Proxy initialized, file not loaded yet.");
+        // File gets loaded here
+        System.out.println(fileReader.readContents());
     }
 }
-
+```
 
 ### Explanation:
-- *SimpleCoffee*: Represents a basic coffee without any extras.
-- *MilkDecorator and SugarDecorator*: Add specific behavior (milk and sugar) to the coffee. They modify getDescription and cost methods to reflect their additions.
-- *CoffeeShop*: Demonstrates creating a SimpleCoffee and then decorating it with milk and sugar.
+- *RealFileReader*: This class simulates reading a large file. The loadFileFromDisk method represents the loading process.
+- *ProxyFileReader*: Acts as a proxy to RealFileReader. It delays the file loading process until the readContents method is called.
+- *ProxyPatternDemo*: Demonstrates the use of ProxyFileReader. The file loading operation is deferred until actual data is requested.
 
-This example illustrates the Decorator Pattern's ability to add new functionalities to objects dynamically and flexibly. The pattern is particularly useful when extending functionality through subclassing is impractical or when you want to add or remove responsibilities from an object at runtime.
+This implementation showcases how the Proxy pattern can be used to defer expensive operations, thus improving performance in scenarios where the costly operation might not be needed immediately or at all.

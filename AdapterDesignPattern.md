@@ -60,5 +60,6 @@ public class AdapterDemo {
 ### Explanation:
 - **XmlParser (Adaptee)**: This is the existing class with the functionality we need but with an incompatible interface.
 - **JsonParser (Target)**: The interface expected by the client.
-- **XmlToJsonAdapter (Adapter)**: Implements `JsonParser` and translates the `parseJson` method call into the `XmlParser`'s `parseXml` method. It adapts the `XmlParser` to the `JsonParser` interface.- **AdapterDemo**: Demonstrates using the adapter where the client expects a JSON parser, but the actual work is done by an XML parser through the adapter.
+- **XmlToJsonAdapter (Adapter)**: Implements `JsonParser` and translates the `parseJson` method call into the `XmlParser`'s `parseXml` method. It adapts the `XmlParser` to the `JsonParser` interface.-
+- **AdapterDemo**: Demonstrates using the adapter where the client expects a JSON parser, but the actual work is done by an XML parser through the adapter.
 The Adapter pattern is useful for integrating new features or systems with existing codebases, ensuring compatibility without the need to refactor or rewrite existing code.

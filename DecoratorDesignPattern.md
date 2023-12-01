@@ -1,6 +1,6 @@
-## Tell me how decorator design pattern works?
+## Tell me about the decorator design pattern?
 
-**The Decorator Design Pattern allows for dynamically adding behavior to objects without affecting the behavior of other objects from the same class. It's widely used in Java, particularly for I/O operations. A real-world example is decorating a BufferedReader around a FileReader to add buffering capabilities to file reading operations.**
+**The Decorator Design Pattern allows us to do some modification to the behavior of objects without affecting the behavior of other objects of the same class. It's widely used in Java, particularly for I/O operations. A real-world example is decorating a BufferedReader around a FileReader to add buffering capabilities to file reading operations.**
 
 ### Real-World Example: Coffee Shop
 Let's create an example where we have a LargeFileReader interface representing the action of reading a large file. The ProxyFileReader will act as a proxy to this file reader, initializing the actual file reading operation only when a method requiring file contents is called.
